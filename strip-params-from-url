@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require 'uri'
+
+list = []
+
+File.readlines(ARGV[0]).each do |line|
+  url = URI.parse(URI.encode(line.chomp))
+  # final_url = url.scheme + "://" + url.host + url.path
+  url.query=nil
+  # list << final_url
+  list << url.to_s
+end
+
+lines  = list.join("\n")
+File.open(ARGV[1], 'w') {|f| f.write(lines)}
